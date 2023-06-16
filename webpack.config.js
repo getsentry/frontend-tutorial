@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const { sentryWebpackPlugin } = require("@sentry/webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -7,10 +8,19 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "build"),
   },
+//   devtool: "source-map",
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
     }),
+    // sentryWebpackPlugin({
+    //     org: "<your org>",
+    //     project: "<your project>",
+
+    //     // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
+    //     // and need `project:releases` and `org:read` scopes
+    //     authToken: process.env.SENTRY_AUTH_TOKEN,
+    //   }),
   ],
   devServer: {
     static: {

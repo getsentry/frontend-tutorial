@@ -17,8 +17,9 @@ module.exports = {
     //     org: "<your org>",
     //     project: "<your project>",
 
-    //     // Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
-    //     // and need `project:releases` and `org:read` scopes
+    //     // Auth tokens can be obtained by creating an internal integration
+    //     // at https://<organiaztion_id>.sentry.io/settings/developer-settings/
+    //     // and need "Release: Admin" and "Organization: Read & Write" permissions
     //     authToken: process.env.SENTRY_AUTH_TOKEN,
     //   }),
   ],

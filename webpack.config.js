@@ -14,8 +14,8 @@ module.exports = {
       template: path.join(__dirname, "public", "index.html"),
     }),
     // sentryWebpackPlugin({
-    //     org: "<your org>",
-    //     project: "<your project>",
+    //     org: "<your_org>",
+    //     project: "<your_project>",
 
     //     // Auth tokens can be obtained by creating an internal integration
     //     // at https://<organiaztion_id>.sentry.io/settings/developer-settings/

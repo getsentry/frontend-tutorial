@@ -21,13 +21,14 @@ module.exports = {
       // at https://<organization_id>.sentry.io/settings/developer-settings/
       // and need "Release: Admin" and "Organization: Read & Write" permissions
       authToken: process.env.SENTRY_AUTH_TOKEN,
-    }),
-    release: {
-      create: true,
-      setCommits: {
-        auto: true,
+      // Enable automatically creating releases and associating commits
+      release: {
+        create: true,
+        setCommits: {
+          auto: true,
+        },
       },
-    },
+    }),
   ],
   devServer: {
     static: {

@@ -119,22 +119,22 @@ class App extends Component {
         - Custom header with transactionId for transaction tracing
         - throw error if response !== 200
     */
-    fetch("http://localhost:8000/checkout", fetchData).then(
-      (error, response) => {
-        if (error) {
-          throw error;
-        }
-        if (response.statusCode === 200) {
-          this.setState({ success: true });
-        } else {
-          throw new Error(
-            response.statusCode +
-              " - " +
-              (response.statusMessage || response.body)
-          );
-        }
-      }
-    );
+    // fetch("http://localhost:8000/checkout", fetchData).then(
+    //   (error, response) => {
+    //     if (error) {
+    //       throw error;
+    //     }
+    //     if (response.statusCode === 200) {
+    //       this.setState({ success: true });
+    //     } else {
+    //       throw new Error(
+    //         response.statusCode +
+    //           " - " +
+    //           (response.statusMessage || response.body)
+    //       );
+    //     }
+    //   }
+    // );
   }
 
   render() {

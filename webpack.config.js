@@ -17,9 +17,9 @@ module.exports = {
     //   org: "<your_org>",
     //   project: "<your_project>",
 
-    //   Auth tokens can be obtained by creating an internal integration
-    //   at https://<organization_id>.sentry.io/settings/developer-settings/
-    //   and need "Release: Admin" and "Organization: Read & Write" permissions
+    //   // Auth tokens can be obtained by creating an internal integration
+    //   // at https://<organization_id>.sentry.io/settings/developer-settings/
+    //   // and need "Release: Admin" and "Organization: Read & Write" permissions
     //   authToken: process.env.SENTRY_AUTH_TOKEN,
     // }),
   ],

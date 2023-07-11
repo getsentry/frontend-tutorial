@@ -94,7 +94,7 @@ class App extends Component {
 
   checkout() {
     // Generate an error
-    // this.myCodeIsPerfect();
+    this.myCodeIsMorePerfect();
 
     const order = {
       email: this.email,
@@ -102,7 +102,7 @@ class App extends Component {
     };
 
     // generate unique transactionId and set as Sentry tag
-    // const transactionId = getUniqueId();
+    const transactionId = getUniqueId();
     // Sentry.configureScope((scope) => {
     //   scope.setTag("transaction_id", transactionId);
     // });
@@ -119,22 +119,22 @@ class App extends Component {
         - Custom header with transactionId for transaction tracing
         - throw error if response !== 200
     */
-    fetch("http://localhost:8000/checkout", fetchData).then(
-      (error, response) => {
-        if (error) {
-          throw error;
-        }
-        if (response.statusCode === 200) {
-          this.setState({ success: true });
-        } else {
-          throw new Error(
-            response.statusCode +
-              " - " +
-              (response.statusMessage || response.body)
-          );
-        }
-      }
-    );
+    // fetch("http://localhost:8000/checkout", fetchData).then(
+    //   (error, response) => {
+    //     if (error) {
+    //       throw error;
+    //     }
+    //     if (response.statusCode === 200) {
+    //       this.setState({ success: true });
+    //     } else {
+    //       throw new Error(
+    //         response.statusCode +
+    //           " - " +
+    //           (response.statusMessage || response.body)
+    //       );
+    //     }
+    //   }
+    // );
   }
 
   render() {

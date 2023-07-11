@@ -102,7 +102,7 @@ class App extends Component {
     };
 
     // generate unique transactionId and set as Sentry tag
-    // const transactionId = getUniqueId();
+    const transactionId = getUniqueId();
     // Sentry.configureScope((scope) => {
     //   scope.setTag("transaction_id", transactionId);
     // });

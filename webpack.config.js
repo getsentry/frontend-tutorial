@@ -15,7 +15,7 @@ module.exports = {
     }),
     sentryWebpackPlugin({
       org: "viv-ip",
-      project: "store-frontend",
+      project: "frontend-tutorial",
 
       // Auth tokens can be obtained by creating an internal integration
       // at https://<organization_id>.sentry.io/settings/developer-settings/

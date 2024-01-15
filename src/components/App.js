@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import * as Sentry from "@sentry/react";
+import * as Sentry from "@sentry/react";
 import "./App.css";
 import wrenchImg from "../assets/wrench.png";
 import nailsImg from "../assets/nails.png";
@@ -13,10 +13,12 @@ class App extends Component {
     super(props);
     this.state = {
       cart: [],
+      hasError: false,
+      success: false,
     };
 
-    // generate random email
-    this.email = Math.random().toString(36).substring(2, 6) + "@yahoo.com";
+    
+    this.email = Math.random().toString(36).substring(2, 6) + "@gmail.com";
 
     this.store = [
       {
@@ -38,6 +40,7 @@ class App extends Component {
         img: hammerImg,
       },
     ];
+
     this.buyItem = this.buyItem.bind(this);
     this.checkout = this.checkout.bind(this);
     this.resetCart = this.resetCart.bind(this);
@@ -52,29 +55,30 @@ class App extends Component {
 
     // Add context to error/event
     // View this data in "Tags"
-    // Sentry.configureScope((scope) => {
-    //   scope.setUser({ email: this.email }); // attach user/email context
-    //   scope.setTag("customerType", "medium-plan"); // custom-tag
-    // });
+    Sentry.configureScope((scope) => {
+      scope.setUser({ email: this.email }); // attach user/email context
+      scope.setTag("customerType", "medium-plan"); // custom-tag
+    });
   }
 
   buyItem(item) {
-    const cart = [].concat(this.state.cart);
+    const cart = [...this.state.cart];
     cart.push(item);
     console.log(item);
     this.setState({ cart, success: false });
 
     // Add context to error/event
     // View this data in "Additional Data"
-    // Sentry.configureScope((scope) => {
-    //   scope.setExtra("cart", JSON.stringify(cart));
-    // });
-    // // View this data in "Breadcrumbs"
-    // Sentry.addBreadcrumb({
-    //   category: "cart",
-    //   message: "User added " + item.name + " to cart",
-    //   level: "info",
-    // });
+    Sentry.configureScope((scope) => {
+      scope.setExtra("cart", JSON.stringify(cart));
+    });
+
+    // View this data in "Breadcrumbs"
+    Sentry.addBreadcrumb({
+      category: "cart",
+      message: "User added " + item.name + " to cart",
+      level: "info",
+    });
   }
 
   resetCart(event) {
@@ -82,19 +86,23 @@ class App extends Component {
     this.setState({ cart: [], hasError: false, success: false });
 
     // Reset context for error/event
-    // Sentry.configureScope((scope) => {
-    //   scope.setExtra("cart", "");
-    // });
-    // Sentry.addBreadcrumb({
-    //   category: "cart",
-    //   message: "User emptied cart",
-    //   level: "info",
-    // });
+    Sentry.configureScope((scope) => {
+      scope.setExtra("cart", "");
+    });
+    Sentry.addBreadcrumb({
+      category: "cart",
+      message: "User emptied cart",
+      level: "info",
+    });
   }
 
   checkout() {
     // Generate an error
-    // this.myCodeIsPerfect();
+    try {
+      this.myCodeIsPerfect();
+    } catch (error) {
+      console.error(error);
+    }
 
     const order = {
       email: this.email,
@@ -103,9 +111,9 @@ class App extends Component {
 
     // generate unique transactionId and set as Sentry tag
     const transactionId = getUniqueId();
-    // Sentry.configureScope((scope) => {
-    //   scope.setTag("transaction_id", transactionId);
-    // });
+    Sentry.configureScope((scope) => {
+      scope.setTag("transaction_id", transactionId);
+    });
 
     // Set transctionID as header
     const fetchData = {
@@ -119,22 +127,22 @@ class App extends Component {
         - Custom header with transactionId for transaction tracing
         - throw error if response !== 200
     */
-    // fetch("http://localhost:8000/checkout", fetchData).then(
-    //   (error, response) => {
-    //     if (error) {
-    //       throw error;
-    //     }
-    //     if (response.statusCode === 200) {
-    //       this.setState({ success: true });
-    //     } else {
-    //       throw new Error(
-    //         response.statusCode +
-    //           " - " +
-    //           (response.statusMessage || response.body)
-    //       );
-    //     }
-    //   }
-    // );
+    fetch("http://localhost:8000/checkout", fetchData)
+      .then((response) => {
+        if (response.ok) {
+          this.setState({ success: true });
+        } else {
+          throw new Error(
+            response.status +
+              " - " +
+              (response.statusText || response.body)
+          );
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({ hasError: true, success: false });
+      });
   }
 
   render() {
@@ -228,3 +236,4 @@ class App extends Component {
 }
 
 export default App;
+

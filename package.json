@@ -1,32 +1,30 @@
 {
-  "name": "frontend-tutorial-2",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "frontend-tutorial",
+  "version": "2.0.0",
+  "type": "module",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack serve --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.22.5",
-    "@babel/preset-env": "^7.22.5",
-    "@babel/preset-react": "^7.22.5",
-    "@sentry/webpack-plugin": "^2.10.3",
-    "babel-loader": "^9.1.2",
-    "css-loader": "^6.8.1",
-    "html-webpack-plugin": "^5.5.3",
-    "style-loader": "^3.3.3",
-    "webpack": "^5.87.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@sentry/react": "^7.59.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  }
+    "@sentry/react": "^9.6.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0"
+  },
+  "license": "MIT"
 }

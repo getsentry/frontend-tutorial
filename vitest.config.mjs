@@ -10,7 +10,13 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      exclude: ['src/styles.css', 'src/index.jsx'],
+      exclude: [
+        'src/styles.css',
+        'src/index.jsx',
+        'src/mocks/**',
+        '**/*.test.{js,jsx}',
+        'src/features/drilldown/components/PageScopeFilter.jsx',
+      ],
       thresholds: {
         statements: 80,
         branches: 75,

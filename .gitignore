@@ -3,5 +3,17 @@
 # dependencies
 /node_modules
 
+# build output
+/dist
+/coverage
+/coverage/
+
+# local env
+.env
+.env.*
+
 # production
 /build
+
+# misc
+.DS_Store

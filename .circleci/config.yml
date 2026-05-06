@@ -1,0 +1,48 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:20.17
+    working_directory: ~/project
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            - v1-npm-deps-
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Check formatting
+          command: npm run format:check
+      - run:
+          name: Run tests with coverage
+          command: npm run test
+      - run:
+          name: Build application
+          command: npm run build
+      - run:
+          name: Prepare artifacts
+          command: |
+            mkdir -p dist
+            mkdir -p coverage
+      - store_artifacts:
+          path: dist
+          destination: dist
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
+  ci:
+    jobs:
+      - build

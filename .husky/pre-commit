@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+set -euo pipefail
+
+echo ""
+echo "🔍 Running pre-commit checks (lint-staged)..."
+
+if ! npm run lint-staged; then
+  echo ""
+  echo "❌ Linting or formatting failed. Fix issues before committing."
+  exit 1
+fi

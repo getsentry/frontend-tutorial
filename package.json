@@ -2,31 +2,65 @@
   "name": "frontend-tutorial-2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "build": "webpack",
-    "start": "webpack serve --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "husky",
+    "prebuild": "npm run lint && npm run format:check",
+    "build": "vite build",
+    "start": "vite",
+    "dev": "vite",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.jsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint-staged": "lint-staged",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.22.5",
-    "@babel/preset-env": "^7.22.5",
-    "@babel/preset-react": "^7.22.5",
-    "@sentry/webpack-plugin": "^2.10.3",
-    "babel-loader": "^9.1.2",
-    "css-loader": "^6.8.1",
-    "html-webpack-plugin": "^5.5.3",
-    "style-loader": "^3.3.3",
-    "webpack": "^5.87.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+  "engines": {
+    "node": ">=20.17.0"
   },
   "dependencies": {
-    "@sentry/react": "^7.59.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@reduxjs/toolkit": "^2.11.2",
+    "highcharts": "^12.5.0",
+    "highcharts-react-official": "^3.2.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^4.4.1",
+    "@vitest/coverage-v8": "^4.0.14",
+    "eslint": "^9.39.1",
+    "eslint-import-resolver-node": "^0.3.10",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-testing-library": "^7.0.5",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "eslint-plugin-vitest": "^0.5.4",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "jsdom": "^27.2.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.3",
+    "vite": "^6.3.5",
+    "vitest": "^4.0.14"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.{css,html,json,md}": [
+      "prettier --write"
+    ]
   }
 }
